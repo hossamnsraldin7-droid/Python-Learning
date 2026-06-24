@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, 
+     initial-scale=1.0">
+     <link rel="manifest" href="manifest.json">
+    <style>
+        h1 { color: #1e3a8a; border-bottom: 3px solid #1e3a8a; padding-bottom: 10px; text-align: center; }
+        body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; margin: 40px; background-color: #f9f9f9; }
+        pre {background-color: #1e293b;color: #f8fafc;padding: 15px;border-radius: 8px;overflow-x: auto;font-family: Consolas, "Courier New", monospace;text-align: left;direction: ltr;unicode-bidi: embed;white-space: pre-wrap;line-height: 1.8;} .comment { color: #64748b; font-style: italic; }
+        .code-btn {width: 100%;padding: 15px 20px;margin-top: 12px;background: linear-gradient(135deg, #c8ff00, #179520 , rgb(3, 79, 171));color: white;border: none;border-radius: 20px;font-size: 16px;font-weight: bold;cursor: pointer;transition: all 0.3s ease;}
+        .code-btn:hover {background: linear-gradient(135deg, rgb(3, 79, 171) ,#179520, #c8ff00 );transform: translateY(-2px);}
+        .code-btn:active {transform: translateY(0);}
+        .comment { color: #64748b; font-style: italic; }
+        .keyword { color: #f43f5e; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1> Student Management System </h1><br><br>
+    <pre id="codeblock">
+<span class="comment"># نظام إدارة درجات الطلاب - مشروع شامل يجمع كل مفاهيم المذكرة</span>
+students_database = {}
+
+def add_student(name, grade):
+    students_database[name] = grade
+    print(f"تم تسجيل الطالب [{name}] بنجاح بدرجة {grade}.")
+
+def generate_report_and_stats():
+    if not students_database:
+        print("قاعدة البيانات فارغة تماماً، لا يوجد طلاب مسجلون.")
+        return
+    
+    grades = list(students_database.values())
+    avg_grade = sum(grades) / len(grades)
+    max_grade = max(grades)
+    min_grade = min(grades)
+    
+    print("\n" + "="*30)
+    print(f" المتوسط العام للدرجات: {avg_grade:.1f}")
+    print(f" أعلى درجة في الفصل: {max_grade}")
+    print(f" أدنى درجة في الفصل: {min_grade}")
+    print("="*30)
+    
+    <span class="comment"># حفظ التقرير تفصيلياً في ملف نصي خارجي بشكل دائم</span>
+    with open("students_final_report.txt", "w", encoding="utf-8") as f:
+        f.write("=== تقرير نتائج الطلاب النهائي ===\n")
+        for name, grade in students_database.items():
+            f.write(f"الطالب: {name} --------> الدرجة: {grade}\n")
+        f.write("\n" + "-"*30 + "\n")
+        f.write(f"المعدل العام: {avg_grade:.1f} | أعلى درجة: {max_grade} | أدنى درجة: {min_grade}\n")
+    print("\n تم تصدير وحفظ التقرير بنجاح في ملف: students_final_report.txt")
+
+<span class="comment"># --- تجربة تشغيل النظام العملي ---</span>
+add_student("محمد", 95)
+add_student("سارة", 88)
+add_student("علي", 72)
+
+<span class="comment"># استخراج التقارير الرياضية وحفظ الملف</span>
+generate_report_and_stats()
+    </pre>
+
+<br>
+<button class="code-btn" onclick="copyCode()">📋 نسخ الكود </button>
+<br>
+<button onclick="window.location.href='index.html#ch14'" class="code-btn">
+    ⬅️ العودة إلى الصفحة السابقة
+</button>
+<script>
+function copyCode() {
+    const code = document.getElementById("codeblock").innerText;
+
+    navigator.clipboard.writeText(code)
+        .then(() => {
+            alert("✅ تم نسخ الكود بنجاح!");
+        })
+        .catch(() => {
+            alert("❌ تعذر نسخ الكود.");
+        });
+}
+</script>
+</body>
+</html>
